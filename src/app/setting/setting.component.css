@@ -1,0 +1,74 @@
+a, p, ul, li, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  color: GrayText;
+}
+
+.c-b {
+  color: black;
+}
+
+i {
+  color: lawngreen;
+}
+
+.fs-16{
+  font-size: 16px;
+}
+
+.fs-14 {
+  font-size: 14px;
+}
+.fs-12 {
+  font-size: 12px;
+}
+
+.setting{
+  height: auto;
+  background-color: lightgrey ;
+  padding-bottom: 40px;
+}
+.users {
+  border-radius: 5px;
+  height: auto;
+}
+
+.user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.name-user {
+  display: flex;
+  flex-flow: column;
+}
+
+.zoomLittle {
+  zoom: 50%;
+}
+
+.zoom-middle .mat-select-content {
+  zoom: 75%;
+}
+
+.zoomNormal {
+  zoom: 100%;
+}
+
+.zoomBig  {
+  zoom: 125%;
+}
+
+.zoom-bigger  {
+  zoom: 150%;
+}
+
+.cursor {
+  cursor: pointer;
+}
+

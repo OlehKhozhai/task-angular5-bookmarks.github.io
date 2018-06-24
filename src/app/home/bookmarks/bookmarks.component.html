@@ -1,0 +1,42 @@
+
+
+
+<div *ngIf="bookmarks?.length >0; else noBookmark">
+  <strong class="d-flex justify-content-center border-top"><h2>Bookmark List</h2></strong>
+  <ul *ngFor="let bookmark of bookmarks | search:searchBm" class="">
+    <li class="d-flex justify-content-between flex-wrap list-group-item-primary border">{{bookmark.title}}
+      <a href="#">
+        <i class="fa fa-pencil" (click)="editBm($event, bookmark)"></i>
+        <i *ngIf="editBm && toEditBm==bookmark" class="fa fa-compress" (click)="clearState()"></i>
+      </a>
+
+      <div class="edit" *ngIf="editBm && toEditBm==bookmark" style="width: 100%">
+        <form (ngSubmit)="updateBm(bookmark)">
+          <div class="d-flex row">
+            <div class="col-lg-6">
+              <input type="text" class="form-control" name="title" [(ngModel)]="bookmark.title" placeholder="Add Title">
+            </div>
+
+            <div class="col-lg-6">
+              <input type="text" class="form-control" name="description" [(ngModel)]="bookmark.description"
+                     placeholder="Add Description">
+            </div>
+          </div>
+          <hr>
+          <div class="col-lg-12 d-flex justify-content-around">
+            <input type="submit" class="btn btn-dark" value="Update Bookmark">
+            <input type="submit" class="btn btn-danger" value="Delete Bookmark" (click)="deleteBm($event, bookmark)">
+          </div>
+        </form>
+      </div>
+
+    </li>
+  </ul>
+  <hr>
+</div>
+<ng-template #noBookmark>
+  <h5>there no bookmarks</h5>
+</ng-template>
+
+
+
