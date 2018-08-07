@@ -1,0 +1,46 @@
+<div class="row w-100">
+  <div *ngIf="bookmarks?.length >0; else noBookmark">
+    <app-add-bookmark></app-add-bookmark>
+    <mat-accordion>
+      <mat-list *ngFor="let bookmark of bookmarks | search : searchBm">
+        <mat-expansion-panel class="p-0">
+          <mat-expansion-panel-header class="pl-1">
+            <mat-list class="d-flex justify-content-between align-content-center w-100 ">
+              <mat-list-item>
+                <mat-icon class="fs-16 d-flex align-items-center" color="black">filter_none</mat-icon>
+                {{bookmark.title}}
+              </mat-list-item>
+            </mat-list>
+          </mat-expansion-panel-header>
+          <div class="mat-expansion-panel-body">
+            <div class="row">
+              <div class="col-lg-12 d-flex justify-content-around">
+                <mat-form-field class="w-45">
+                  <input matInput [(ngModel)]="bookmark.title" placeholder="Title">
+                </mat-form-field>
+                <mat-form-field class="w-45">
+                  <input matInput [(ngModel)]="bookmark.description" placeholder="Description">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 d-flex justify-content-around">
+                <input type="submit" class="btn btn-danger" value="Delete" (click)="deleteBm($event, bookmark)">
+                <input type="submit" class="btn btn-primary" value="Save" (click)="updateBm(bookmark)">
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-list>
+    </mat-accordion>
+  </div>
+</div>
+
+<ng-template #noBookmark>
+  <div class="row loading d-flex justify-content-center pt-5 pb-5 flex-column">
+    <h4 class="fs-12 text-secondary pb-1">Loading</h4>
+    <mat-progress-bar mode="indeterminate" class=""></mat-progress-bar>
+  </div>
+</ng-template>
+
+

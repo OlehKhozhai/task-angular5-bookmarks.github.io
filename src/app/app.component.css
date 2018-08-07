@@ -1,7 +1,26 @@
 
-.navigate a {
-  padding: 0 3px ;
+
+a {
+  text-decoration: none;
+  cursor: pointer;
 }
-.navigate {
-  height: 7vh;
+
+::-webkit-input-placeholder, span i {
+  color: #fff;
+  transition: opacity 250ms ease-in-out;
 }
+.wrapper_search input{
+  color: #fff;
+}
+
+
+
+@media only screen and (max-width:  580px){
+  .mat-toolbar{
+    width: 800px;
+  }
+  .text-white {
+    font-size: 16px;
+  }
+}
+

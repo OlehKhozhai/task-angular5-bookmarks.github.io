@@ -11,10 +11,9 @@ export class BookmarkService {
   bookmarkDoc: AngularFirestoreDocument<Bookmark>;
 
 
-
   constructor(public afs: AngularFirestore) {
-    // this.bookmarks = this.afs.collection('bookmarks').valueChanges();
-    this.bookmarksCollection = this.afs.collection('bookmarks', ref => ref.orderBy('title','asc'));
+    this.bookmarks = this.afs.collection('bookmarks').valueChanges();
+    this.bookmarksCollection = this.afs.collection('bookmarks', ref => ref.orderBy('title', 'asc'));
 
     this.bookmarks = this.bookmarksCollection.snapshotChanges().map(actions => {
       return actions.map(a => {
@@ -53,7 +52,7 @@ export class BookmarkService {
 
     printContainer.innerHTML = '';
 
-    let elementCopy = printEl.cloneNode(true);
+    const elementCopy = printEl.cloneNode(true);
     printContainer.appendChild(elementCopy);
     document.body.appendChild(printContainer);
 

@@ -1,38 +1,36 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {BookmarkService} from '../service/bookmark.service';
-import {Bookmark} from '../service/bookmark.model';
-
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {BookmarkService} from './service/bookmark.service';
+import {Bookmark} from './service/bookmark.model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-bookmarks',
   templateUrl: './bookmarks.component.html',
   styleUrls: ['./bookmarks.component.css']
 })
-export class BookmarksComponent implements OnInit {
+export class BookmarksComponent implements OnDestroy, OnInit {
   bookmarks: Bookmark[];
   editState = false;
-  toEditBm:  Bookmark;
+  toEditBm: Bookmark;
   searchBm = '';
-  openCreator = false;
+  bookmarkSubscribe: Subscription;
+
   constructor(private bookmarkService: BookmarkService) {
   }
 
   ngOnInit() {
-    this.bookmarkService.getBookmarks().subscribe(bookmarks => {
-      console.log(bookmarks);
+    this.bookmarkSubscribe = this.bookmarkService.getBookmarks().subscribe(bookmarks => {
       this.bookmarks = bookmarks;
     });
+  }
+
+  ngOnDestroy() {
+    this.bookmarkSubscribe.unsubscribe();
   }
 
   deleteBm(event, bookmark: Bookmark) {
     this.clearState();
     this.bookmarkService.deleteBm(bookmark);
-  }
-
-  editBm(event, bookmark: Bookmark) {
-    this.editState = true;
-    this.toEditBm = bookmark;
-    this.openCreator = false;
   }
 
   clearState() {
@@ -44,5 +42,4 @@ export class BookmarksComponent implements OnInit {
     this.bookmarkService.updateBm(bookmark);
     this.clearState();
   }
-
 }

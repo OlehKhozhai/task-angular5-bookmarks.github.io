@@ -1,0 +1,33 @@
+.middle {
+  vertical-align: middle;
+}
+
+.mat-list-item, .mat-list {
+  padding: 0;
+}
+
+.mat-list:visited {
+  background-color: grey;
+}
+
+.mat-expansion-panel {
+  margin: 0;
+  padding: 0;
+
+}
+
+.w-45 {
+  width: 45%;
+}
+
+mat-expansion-panel-header {
+  width: 700px;
+}
+
+
+@media only screen and (max-width: 768px) {
+  mat-expansion-panel-header {
+    width: 500px;
+  }
+
+}

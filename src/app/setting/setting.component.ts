@@ -1,5 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {MatSelectChange} from '@angular/material';
+import {SettingService} from './setting.service';
+import {DEFAULT_SETTINGS, Settings, THEME_LIST, zoomsList} from './setting.model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-setting',
@@ -7,29 +10,37 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./setting.component.css'],
 })
 
-export class SettingComponent implements OnInit {
+export class SettingComponent implements OnDestroy, OnInit {
 
+  settings: Settings = DEFAULT_SETTINGS;
+  settingsSubscription: Subscription;
   currentlyChange = '';
+  themeList = THEME_LIST;
+  zooms = zoomsList;
 
-
-  zooms = [
-    {value: '75%', viewValue: '75%'},
-    {value: '100%', viewValue: '100%'},
-    {value: '125%', viewValue: '125%'}
-
-  ];
-  constructor() { }
-
-  zoomChange(event: any) {
-    this.currentlyChange = event.target.value;
-    document.body.style.zoom  = event.target.value ;
+  constructor(private settingService: SettingService) {
   }
 
-  ngOnInit() {
+  onZoomChanged(event: MatSelectChange) {
+    this.currentlyChange = event.value;
+    this.settingService.setSetting('zoom', event.value);
   }
 
   onPrint() {
     window.print();
   }
 
+  ngOnDestroy() {
+    this.settingsSubscription.unsubscribe();
+  }
+
+  ngOnInit() {
+    this.settingsSubscription = this.settingService.getSettings().subscribe(settings => {
+      this.settings = settings;
+    });
+  }
+
+  onChangeTheme(event) {
+    this.settingService.setSetting('themeId', event.value);
+  }
 }

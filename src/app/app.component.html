@@ -1,13 +1,30 @@
-<div class="bg-info navigate d-flex align-items-center">
-  <a routerLink="/setting">
-    <i class="fas fa-align-justify"></i>
-  </a>
-  <a routerLink="/">Bookmark</a>
+<div class="wrapper-body d-flex justify-content-center flex-wrap" [ngClass]="getThemeClass()">
+  <mat-toolbar color="primary" size="100">
+
+    <div class="w-25">
+      <div class="wrap_menu">
+        <a routerLink="/setting">
+          <mat-icon class="fa fa-reorder text-white"></mat-icon>
+        </a>
+        <a class="text-white" routerLink="/home">Bookmark</a>
+      </div>
+    </div>
+    <div class="w-50">
+
+      <div class="input-group wrapper_search">
+        <div class="input-group-prepend">
+          <span class="input-group-text bg-primary border-0">
+            <a href='#'>
+              <i class="fa fa-search"></i>
+            </a>
+          </span>
+        </div>
+        <input type="text" class="form-control bg-primary border-0" size="75" placeholder="Search" aria-label="Search" [(ngModel)]="searchBm">
+      </div>
+    </div>
+  </mat-toolbar>
+
+  <div class="container bg-white d-flex justify-content-center">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-
-<router-outlet></router-outlet>
-
-
-
-
-
